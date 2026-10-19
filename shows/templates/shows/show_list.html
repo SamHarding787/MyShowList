@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>My Show List</title>
+</head>
+<body>
+	<h1>My Show List</h1>
+	<a href="{% url 'add_show' %}">Add a Show</a>
+
+	<hr>
+	{% if shows %}
+		{% for show in shows%}
+			<div>
+				<h2>{{ show.title }}</h2>
+				
+				<p>Genre: {{show.genre}}</p>
+				<p>Rating: {{show.genre}}</p>
+				<p>Date Watched: {{ show.date_watched}}</p>
+				<p>Notes: {{ show.notes }}</p>
+			</div>
+			
+			<hr>
+		{% endfor %}
+	{% else %}
+		<p>No shows have been added yet.</p>
+	{% endif %}
+
+</body>
+</html>

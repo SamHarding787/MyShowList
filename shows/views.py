@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import ShowForm
+from .models import Show
 
 def add_show(request):
 	if request.method == 'POST':
@@ -12,3 +13,6 @@ def add_show(request):
 		form = ShowForm()
 	return render(request, 'shows/add_show.html', {'form': form})
 
+def show_list(request):
+	shows = Show.objects.all()
+	return render(request, 'shows/show_list.html', {'shows': shows})
