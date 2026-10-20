@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ShowForm
 from .models import Show
 
@@ -17,7 +17,7 @@ def show_list(request):
 	query = request.GET.get('q')
 
 	if query:
-		shows = Show.objects.filter(title_icontains=query)
+		shows = Show.objects.filter(title__icontains=query)
 	else:
 		shows = Show.objects.all()
 
