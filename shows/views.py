@@ -25,3 +25,9 @@ def show_list(request):
 		'shows': shows,
 		'query': query
 	})
+
+def delete_show(request, show_id):
+	if request.method == 'POST':
+		show = Show.objects.get(id=show_id)
+		show.delete()
+	return redirect('show_list')
