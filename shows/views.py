@@ -8,11 +8,20 @@ def add_show(request):
 
 		if form.is_valid():
 			form.save()
-			return redirect('add_show')
+			return redirect('show_list')
 	else:
 		form = ShowForm()
 	return render(request, 'shows/add_show.html', {'form': form})
 
 def show_list(request):
-	shows = Show.objects.all()
-	return render(request, 'shows/show_list.html', {'shows': shows})
+	query = request.GET.get('q')
+
+	if query:
+		shows = Show.objects.filter(title_icontains=query)
+	else:
+		shows = Show.objects.all()
+
+	return render(request, 'shows/show_list.html', {
+		'shows': shows,
+		'query': query
+	})
